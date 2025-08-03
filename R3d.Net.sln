@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R3d.Net", "R3d.Net\R3d.Net.csproj", "{2E3462E8-E975-40B8-9590-20D44ADAFBFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R3d.Net.Examples", "R3d.Net.Examples\R3d.Net.Examples.csproj", "{88B394C8-0326-4916-8080-C699FCE8A8AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E3462E8-E975-40B8-9590-20D44ADAFBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3462E8-E975-40B8-9590-20D44ADAFBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3462E8-E975-40B8-9590-20D44ADAFBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3462E8-E975-40B8-9590-20D44ADAFBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B394C8-0326-4916-8080-C699FCE8A8AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B394C8-0326-4916-8080-C699FCE8A8AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B394C8-0326-4916-8080-C699FCE8A8AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B394C8-0326-4916-8080-C699FCE8A8AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5607FE7-3DC8-430F-96FD-47BA272AA091}
+	EndGlobalSection
+EndGlobal
