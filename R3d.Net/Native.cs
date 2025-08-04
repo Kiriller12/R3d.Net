@@ -9,6 +9,9 @@ namespace R3d.Net
     /// <summary>
     /// R3d native imported methods
     /// </summary>
+    /// <remarks>
+    /// Should be actual as of b47719de506deb4a32692277906bdeac5e7d6f79
+    /// </remarks>
     [SuppressUnmanagedCodeSecurity]
     public static unsafe partial class R3d
     {
@@ -31,7 +34,6 @@ namespace R3d.Net
         /// <param name="flags">Flags indicating internal behavior (modifiable via SetState)</param>
         [DllImport(NativeDll, EntryPoint = "R3D_Init", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Init(int resWidth, int resHeight, ConfigFlag flags);
-
 
         /// <summary>
         /// Closes the rendering engine and deallocates all resources.
@@ -76,7 +78,7 @@ namespace R3d.Net
         /// <param name="width">Pointer to store the width of the internal resolution</param>
         /// <param name="height">Pointer to store the height of the internal resolution</param>
         [DllImport(NativeDll, EntryPoint = "R3D_GetResolution", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetResolution(int* width, int* height);
+        public static extern void GetResolution(out int width, out int height);
 
         /// <summary>
         /// Updates the internal resolution.
@@ -320,7 +322,7 @@ namespace R3d.Net
         ///
         /// This function renders a 3D sprite multiple times using instancing, with a global transformation
         /// applied to all instances, and individual transformation matrices and colors for each instance.
-        /// Each instance can have its own position, rotation, scale, and color while sharing the same sprite.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same sprite
         /// </summary>
         /// <param name="sprite">A pointer to the sprite to render. Cannot be NULL</param>
         /// <param name="globalAabb">Optional bounding box encompassing all instances, in local space. Used for frustum culling. Can be NULL to disable culling. Will be transformed by the global matrix if provided</param>
