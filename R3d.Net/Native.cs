@@ -10,7 +10,10 @@ namespace R3d.Net
     /// R3d native imported methods
     /// </summary>
     /// <remarks>
-    /// Should be actual as of b47719de506deb4a32692277906bdeac5e7d6f79
+    /// Should be actual as of 
+    /// <see href="https://github.com/Bigfoot71/r3d/blob/b47719de506deb4a32692277906bdeac5e7d6f79/include/r3d.h">
+    /// b47719de506deb4a32692277906bdeac5e7d6f79
+    /// </see>
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
     public static unsafe partial class R3d
@@ -75,8 +78,8 @@ namespace R3d.Net
         /// This function retrieves the current internal resolution being used by the
         /// rendering engine
         /// </summary>
-        /// <param name="width">Pointer to store the width of the internal resolution</param>
-        /// <param name="height">Pointer to store the height of the internal resolution</param>
+        /// <param name="width">Width of the internal resolution</param>
+        /// <param name="height">Height of the internal resolution</param>
         [DllImport(NativeDll, EntryPoint = "R3D_GetResolution", CallingConvention = CallingConvention.Cdecl)]
         public static extern void GetResolution(out int width, out int height);
 
@@ -617,7 +620,7 @@ namespace R3d.Net
         /// <param name="filePath">Path to the 3D model file to load</param>
         /// <returns>Loaded model structure containing meshes and materials</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadModel", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Model LoadModel(char* filePath);
+        public static extern Types.Model LoadModel(sbyte* filePath);
 
         /// <summary>
         /// Load a 3D model from memory buffer.
@@ -634,7 +637,7 @@ namespace R3d.Net
         /// <param name="size">Size of the data buffer in bytes</param>
         /// <returns>Loaded model structure containing meshes and materials</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadModelFromMemory", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Model LoadModelFromMemory(char* fileType, void* data, uint size);
+        public static extern Types.Model LoadModelFromMemory(sbyte* fileType, void* data, uint size);
 
         /// <summary>
         /// Create a model from a single mesh.
@@ -683,11 +686,11 @@ namespace R3d.Net
         /// using UnloadModelAnimations()
         /// </summary>
         /// <param name="fileName">Path to the model file containing animation(s)</param>
-        /// <param name="animCount">Pointer to an integer that will receive the number of animations loaded</param>
+        /// <param name="animCount">An integer that will receive the number of animations loaded</param>
         /// <param name="targetFrameRate">Desired frame rate (FPS) to sample the animation at. For example, 30 or 60</param>
         /// <returns>Pointer to a dynamically allocated array of ModelAnimation. NULL on failure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadModelAnimations", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.ModelAnimation* LoadModelAnimations(char* fileName, int* animCount, int targetFrameRate);
+        public static extern Types.ModelAnimation* LoadModelAnimations(sbyte* fileName, out int animCount, int targetFrameRate);
 
         /// <summary>
         /// Loads model animations from memory data in a supported format (e.g., GLTF, IQM).
@@ -699,11 +702,11 @@ namespace R3d.Net
         /// <param name="fileType">File format hint (e.g., "gltf", "iqm", ".gltf"). The leading dot is optional</param>
         /// <param name="data">Pointer to the model data in memory</param>
         /// <param name="size">Size of the data buffer in bytes</param>
-        /// <param name="animCount">Pointer to an integer that will receive the number of animations loaded</param>
+        /// <param name="animCount">An integer that will receive the number of animations loaded</param>
         /// <param name="targetFrameRate">Desired frame rate (FPS) to sample the animation at. For example, 30 or 60</param>
         /// <returns>Pointer to a dynamically allocated array of ModelAnimation. NULL on failure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadModelAnimationsFromMemory", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.ModelAnimation* LoadModelAnimationsFromMemory(char* fileType, void* data, uint size, int* animCount, int targetFrameRate);
+        public static extern Types.ModelAnimation* LoadModelAnimationsFromMemory(sbyte* fileType, void* data, uint size, out int animCount, int targetFrameRate);
 
         /// <summary>
         /// Frees memory allocated for model animations.
@@ -725,7 +728,7 @@ namespace R3d.Net
         /// <param name="name">Name of the animation to find (case-sensitive)</param>
         /// <returns>Pointer to the matching animation, or NULL if not found</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetModelAnimation", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.ModelAnimation* GetModelAnimation(Types.ModelAnimation* animations, int animCount, char* name);
+        public static extern Types.ModelAnimation* GetModelAnimation(Types.ModelAnimation* animations, int animCount, sbyte* name);
 
         /// <summary>
         /// Logs the names of all animations in the array (for debugging or inspection).
@@ -1528,7 +1531,7 @@ namespace R3d.Net
         /// <param name="ambient">Pointer to store the intensity value for ambient light produced by the skybox</param>
         /// <param name="reflection">Pointer to store the intensity value for reflections from the skybox</param>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSkyboxIntensity", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetSkyboxIntensity(float* background, float* ambient, float* reflection);
+        public static extern void GetSkyboxIntensity(out float background, out float ambient, out float reflection);
 
         #endregion
 
@@ -1543,7 +1546,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="enabled">Whether to enable or disable SSAO</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetSSAO", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSsao(bool enabled);
+        public static extern void SetSSAO(bool enabled);
 
         /// <summary>
         /// Gets the current state of SSAO.
@@ -1552,7 +1555,7 @@ namespace R3d.Net
         /// </summary>
         /// <returns>True if SSAO is enabled, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSSAO", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool GetSsao();
+        public static extern bool GetSSAO();
 
         /// <summary>
         /// Sets the radius for SSAO effect.
@@ -1563,7 +1566,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="value">The radius value to set for SSAO</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetSSAORadius", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSsaoRadius(float value);
+        public static extern void SetSSAORadius(float value);
 
         /// <summary>
         /// Gets the current SSAO radius.
@@ -1572,7 +1575,7 @@ namespace R3d.Net
         /// </summary>
         /// <returns>The radius value for SSAO</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSSAORadius", CallingConvention = CallingConvention.Cdecl)]
-        public static extern float GetSsaoRadius();
+        public static extern float GetSSAORadius();
 
         /// <summary>
         /// Sets the bias for SSAO effect.
@@ -1583,7 +1586,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="value">The bias value for SSAO</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetSSAOBias", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSsaoBias(float value);
+        public static extern void SetSSAOBias(float value);
 
         /// <summary>
         /// Gets the current SSAO bias.
@@ -1592,7 +1595,7 @@ namespace R3d.Net
         /// </summary>
         /// <returns>The SSAO bias value</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSSAOBias", CallingConvention = CallingConvention.Cdecl)]
-        public static extern float GetSsaoBias();
+        public static extern float GetSSAOBias();
 
         /// <summary>
         /// Sets the number of blur iterations for the SSAO effect.
@@ -1604,7 +1607,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="value">The number of blur iterations for SSAO</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetSSAOIterations", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSsaoIterations(int value);
+        public static extern void SetSSAOIterations(int value);
 
         /// <summary>
         /// Gets the current number of blur iterations for the SSAO effect.
@@ -1613,7 +1616,7 @@ namespace R3d.Net
         /// </summary>
         /// <returns>The number of blur iterations for SSAO</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSSAOIterations", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int GetSsaoIterations();
+        public static extern int GetSSAOIterations();
 
         #endregion
 
@@ -1959,7 +1962,7 @@ namespace R3d.Net
         /// <param name="layout">The cubemap layout format</param>
         /// <returns>The loaded skybox object</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadSkybox", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Skybox LoadSkybox(char* fileName, CubemapLayout layout);
+        public static extern Skybox LoadSkybox(sbyte* fileName, CubemapLayout layout);
 
         /// <summary>
         /// Loads a skybox from an image in memory.
@@ -1983,7 +1986,7 @@ namespace R3d.Net
         /// <param name="size">The resolution of the generated cubemap (e.g., 512, 1024)</param>
         /// <returns>The loaded skybox object</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_LoadSkyboxPanorama", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Skybox LoadSkyboxPanorama(char* fileName, int size);
+        public static extern Skybox LoadSkyboxPanorama(sbyte* fileName, int size);
 
         /// <summary>
         /// Loads a skybox from a panorama image in memory.
