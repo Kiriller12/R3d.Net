@@ -156,44 +156,6 @@ namespace R3d.Net
         }
 
         /// <summary>
-        /// Draws a mesh with instancing support and different colors per instance.
-        ///
-        /// This function renders a mesh multiple times with different transformation matrices for each instance
-        /// </summary>
-        /// <param name="mesh">A reference to the mesh to render</param>
-        /// <param name="material">A reference to the material to apply to the mesh</param>
-        /// <param name="instanceTransforms">Array of transformation matrices for each instance</param>
-        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
-        public static void DrawMeshInstancedEx(ref Types.Mesh mesh, ref Types.Material material, Span<Matrix4x4> instanceTransforms,
-             int instanceCount)
-        {
-            fixed (Types.Mesh* meshPointer = &mesh)
-            fixed (Types.Material* materialPointer = &material)
-            fixed (Matrix4x4* transformsPointer = instanceTransforms)
-            {
-                DrawMeshInstancedEx(meshPointer, materialPointer, transformsPointer, null, instanceCount);
-            }
-        }
-
-        /// <summary>
-        /// Draws a mesh with instancing support and different colors per instance.
-        ///
-        /// This function renders a mesh multiple times with different transformation matrices for each instance.
-        /// The default material will be used
-        /// </summary>
-        /// <param name="mesh">A reference to the mesh to render</param>
-        /// <param name="instanceTransforms">Array of transformation matrices for each instance</param>
-        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
-        public static void DrawMeshInstancedEx(ref Types.Mesh mesh, Span<Matrix4x4> instanceTransforms, int instanceCount)
-        {
-            fixed (Types.Mesh* meshPointer = &mesh)
-            fixed (Matrix4x4* transformsPointer = instanceTransforms)
-            {
-                DrawMeshInstancedEx(meshPointer, null, transformsPointer, null, instanceCount);
-            }
-        }
-
-        /// <summary>
         /// Draws a mesh with instancing support, a global transformation, and different colors per instance.
         ///
         /// This function renders a mesh multiple times using instancing, with a global transformation
@@ -472,6 +434,149 @@ namespace R3d.Net
             fixed (Types.Model* modelPointer = &model)
             {
                 DrawModelPro(modelPointer, transform);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support.
+        ///
+        /// This function renders a model multiple times with different transformation matrices
+        /// for each instance
+        /// </summary>
+        /// <param name="model">A reference to the model to render</param>
+        /// <param name="instanceTransforms">Array of transformation matrices for each instance</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstanced(ref Types.Model model, Span<Matrix4x4> instanceTransforms, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            {
+                DrawModelInstanced(modelPointer, transformsPointer, instanceCount);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support and different colors per instance.
+        ///
+        /// This function renders a model multiple times with different transformation matrices
+        /// and different colors for each instance
+        /// </summary>
+        /// <param name="model">A reference to the model to render</param>
+        /// <param name="instanceTransforms">Array of transformation matrices for each instance</param>
+        /// <param name="instanceColors">Array of colors for each instance</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstancedEx(ref Types.Model model, Span<Matrix4x4> instanceTransforms,
+            Span<Color> instanceColors, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            fixed (Color* colorsPointer = instanceColors)
+            {
+                DrawModelInstancedEx(modelPointer, transformsPointer, colorsPointer, instanceCount);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support, a global transformation, and different colors per instance.
+        ///
+        /// This function renders a model multiple times using instancing, with a global transformation
+        /// applied to all instances, and individual transformation matrices and colors for each instance.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same model
+        /// </summary>
+        /// <param name="model">A pointer to the model to render</param>
+        /// <param name="globalAabb">Optional bounding box encompassing all instances, in local space. Used for frustum culling. Will be transformed by the global matrix if necessary</param>
+        /// <param name="globalTransform">The global transformation matrix applied to all instances</param>
+        /// <param name="instanceTransforms">Pointer to an array of transformation matrices for each instance, allowing unique transformations</param>
+        /// <param name="transformsStride">The stride (in bytes) between consecutive transformation matrices in the array. Set to 0 if the matrices are tightly packed (stride equals sizeof(Matrix)). If matrices are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceColors">Pointer to an array of colors for each instance, allowing unique colors</param>
+        /// <param name="colorsStride">The stride (in bytes) between consecutive colors in the array. Set to 0 if the colors are tightly packed (stride equals sizeof(Color)). If colors are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstancedPro(ref Types.Model model, ref BoundingBox globalAabb, Matrix4x4 globalTransform,
+            Span<Matrix4x4> instanceTransforms, int transformsStride, Span<Color> instanceColors, int colorsStride, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (BoundingBox* globalAabbPointer = &globalAabb)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            fixed (Color* colorsPointer = instanceColors)
+            {
+                DrawModelInstancedPro(modelPointer, globalAabbPointer, globalTransform, transformsPointer,
+                    transformsStride, colorsPointer, colorsStride, instanceCount);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support, a global transformation, and different colors per instance.
+        ///
+        /// This function renders a model multiple times using instancing, with a global transformation
+        /// applied to all instances, and individual transformation matrices and colors for each instance.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same model.
+        /// Culling is disabled
+        /// </summary>
+        /// <param name="model">A pointer to the model to render</param>
+        /// <param name="globalTransform">The global transformation matrix applied to all instances</param>
+        /// <param name="instanceTransforms">Pointer to an array of transformation matrices for each instance, allowing unique transformations</param>
+        /// <param name="transformsStride">The stride (in bytes) between consecutive transformation matrices in the array. Set to 0 if the matrices are tightly packed (stride equals sizeof(Matrix)). If matrices are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceColors">Pointer to an array of colors for each instance, allowing unique colors</param>
+        /// <param name="colorsStride">The stride (in bytes) between consecutive colors in the array. Set to 0 if the colors are tightly packed (stride equals sizeof(Color)). If colors are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstancedPro(ref Types.Model model, Matrix4x4 globalTransform,
+            Span<Matrix4x4> instanceTransforms, int transformsStride, Span<Color> instanceColors, int colorsStride, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            fixed (Color* colorsPointer = instanceColors)
+            {
+                DrawModelInstancedPro(modelPointer, null, globalTransform, transformsPointer, transformsStride,
+                    colorsPointer, colorsStride, instanceCount);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support, a global transformation per instance.
+        ///
+        /// This function renders a model multiple times using instancing, with a global transformation
+        /// applied to all instances, and individual transformation matrices and colors for each instance.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same model
+        /// </summary>
+        /// <param name="model">A pointer to the model to render</param>
+        /// <param name="globalAabb">Optional bounding box encompassing all instances, in local space. Used for frustum culling. Will be transformed by the global matrix if necessary</param>
+        /// <param name="globalTransform">The global transformation matrix applied to all instances</param>
+        /// <param name="instanceTransforms">Pointer to an array of transformation matrices for each instance, allowing unique transformations</param>
+        /// <param name="transformsStride">The stride (in bytes) between consecutive transformation matrices in the array. Set to 0 if the matrices are tightly packed (stride equals sizeof(Matrix)). If matrices are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstancedPro(ref Types.Model model, ref BoundingBox globalAabb, Matrix4x4 globalTransform,
+            Span<Matrix4x4> instanceTransforms, int transformsStride, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (BoundingBox* globalAabbPointer = &globalAabb)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            {
+                DrawModelInstancedPro(modelPointer, globalAabbPointer, globalTransform, transformsPointer,
+                    transformsStride, null, 0, instanceCount);
+            }
+        }
+
+        /// <summary>
+        /// Draws a model with instancing support, a global transformation per instance.
+        ///
+        /// This function renders a model multiple times using instancing, with a global transformation
+        /// applied to all instances, and individual transformation matrices and colors for each instance.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same model.
+        /// Culling is disabled
+        /// </summary>
+        /// <param name="model">A pointer to the model to render</param>
+        /// <param name="globalTransform">The global transformation matrix applied to all instances</param>
+        /// <param name="instanceTransforms">Pointer to an array of transformation matrices for each instance, allowing unique transformations</param>
+        /// <param name="transformsStride">The stride (in bytes) between consecutive transformation matrices in the array. Set to 0 if the matrices are tightly packed (stride equals sizeof(Matrix)). If matrices are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        public static void DrawModelInstancedPro(ref Types.Model model, Matrix4x4 globalTransform,
+            Span<Matrix4x4> instanceTransforms, int transformsStride, int instanceCount)
+        {
+            fixed (Types.Model* modelPointer = &model)
+            fixed (Matrix4x4* transformsPointer = instanceTransforms)
+            {
+                DrawModelInstancedPro(modelPointer, null, globalTransform, transformsPointer, transformsStride,
+                    null, 0, instanceCount);
             }
         }
 

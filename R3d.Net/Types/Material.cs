@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace R3d.Net.Types
@@ -50,6 +51,22 @@ namespace R3d.Net.Types
         /// Billboard mode applied to the object
         /// </summary>
         public BillboardMode BillboardMode;
+
+        /// <summary>
+        /// UV offset applied to the texture coordinates.
+        /// 
+        /// For models, this can be set manually.
+        /// For sprites, this value is overridden automatically
+        /// </summary>
+        Vector2 uvOffset;
+
+        /// <summary>
+        /// UV scale factor applied to the texture coordinates.
+        /// 
+        /// For models, this can be set manually.
+        /// For sprites, this value is overridden automatically
+        /// </summary>
+        Vector2 uvScale;
 
         /// <summary>
         /// Alpha threshold below which fragments are discarded

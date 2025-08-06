@@ -11,8 +11,8 @@ namespace R3d.Net
     /// </summary>
     /// <remarks>
     /// Should be actual as of 
-    /// <see href="https://github.com/Bigfoot71/r3d/blob/b47719de506deb4a32692277906bdeac5e7d6f79/include/r3d.h">
-    /// b47719de506deb4a32692277906bdeac5e7d6f79
+    /// <see href="https://github.com/Bigfoot71/r3d/blob/9c24e368d0114932df2107b3bd9053e6bffb7319/include/r3d.h">
+    /// 9c24e368d0114932df2107b3bd9053e6bffb7319
     /// </see>
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
@@ -255,6 +255,51 @@ namespace R3d.Net
         /// <param name="transform">A transformation matrix that defines how to position, rotate, and scale the model</param>
         [DllImport(NativeDll, EntryPoint = "R3D_DrawModelPro", CallingConvention = CallingConvention.Cdecl)]
         public static extern void DrawModelPro(Types.Model* model, Matrix4x4 transform);
+
+        /// <summary>
+        /// Draws a model with instancing support.
+        ///
+        /// This function renders a model multiple times with different transformation matrices
+        /// for each instance.
+        /// </summary>
+        /// <param name="model">A pointer to the model to render. Cannot be NULL</param>
+        /// <param name="instanceTransforms">Array of transformation matrices for each instance. Cannot be NULL</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        [DllImport(NativeDll, EntryPoint = "R3D_DrawModelInstanced", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DrawModelInstanced(Types.Model* model, Matrix4x4* instanceTransforms, int instanceCount);
+
+        /// <summary>
+        /// Draws a model with instancing support and different colors per instance.
+        ///
+        /// This function renders a model multiple times with different transformation matrices
+        /// and different colors for each instance.
+        /// </summary>
+        /// <param name="model">A pointer to the model to render. Cannot be NULL</param>
+        /// <param name="instanceTransforms">Array of transformation matrices for each instance. Cannot be NULL</param>
+        /// <param name="instanceColors">Array of colors for each instance. Can be NULL if no per-instance colors are needed</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        [DllImport(NativeDll, EntryPoint = "R3D_DrawModelInstancedEx", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DrawModelInstancedEx(Types.Model* model, Matrix4x4* instanceTransforms, Color* instanceColors, int instanceCount);
+
+        /// <summary>
+        /// Draws a model with instancing support, a global transformation, and different colors per instance.
+        ///
+        /// This function renders a model multiple times using instancing, with a global transformation
+        /// applied to all instances, and individual transformation matrices and colors for each instance.
+        /// Each instance can have its own position, rotation, scale, and color while sharing the same model.
+        /// </summary>
+        /// <param name="model">A pointer to the model to render. Cannot be NULL</param>
+        /// <param name="globalAabb">Optional bounding box encompassing all instances, in local space. Used for frustum culling. Can be NULL to disable culling. Will be transformed by the global matrix if necessary</param>
+        /// <param name="globalTransform">The global transformation matrix applied to all instances</param>
+        /// <param name="instanceTransforms">Pointer to an array of transformation matrices for each instance, allowing unique transformations. Cannot be NULL</param>
+        /// <param name="transformsStride">The stride (in bytes) between consecutive transformation matrices in the array. Set to 0 if the matrices are tightly packed (stride equals sizeof(Matrix)). If matrices are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceColors">Pointer to an array of colors for each instance, allowing unique colors. Can be NULL if no per-instance colors are needed</param>
+        /// <param name="colorsStride">The stride (in bytes) between consecutive colors in the array. Set to 0 if the colors are tightly packed (stride equals sizeof(Color)). If colors are embedded in a struct, set to the size of the struct or the actual byte offset between elements</param>
+        /// <param name="instanceCount">The number of instances to render. Must be greater than 0</param>
+        [DllImport(NativeDll, EntryPoint = "R3D_DrawModelInstancedPro", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DrawModelInstancedPro(Types.Model* model, BoundingBox* globalAabb, Matrix4x4 globalTransform,
+            Matrix4x4* instanceTransforms, int transformsStride, Color* instanceColors, int colorsStride, int instanceCount);
+
 
         /// <summary>
         /// Draws a sprite at a specified position.
