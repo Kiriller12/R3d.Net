@@ -1,21 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.0.1</Version>
-    <PackageVersion>0.0.1</PackageVersion>
+    <Version>0.1.0</Version>
+    <PackageVersion>0.1.0</PackageVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="../../r3d/build/Release/r3d.dll" CopyToOutputDirectory="Always" Link="runtimes/win-x64/native/r3d.dll" />
-    <None Include="../../r3d/build/external/assimp/bin/Release/assimp-vc143-mt.dll" CopyToOutputDirectory="Always" Link="runtimes/win-x64/native/assimp-vc143-mt.dll" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="7.0.1" />
