@@ -1,6 +1,6 @@
 # R3d.Net
 
-C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering library for [raylib](www.raylib.com)
+C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering library for [raylib](https://www.raylib.com)
 
 [![GitHub contributors](https://img.shields.io/github/contributors/Kiriller12/R3d.Net)](https://github.com/Kiriller12/R3d.Net/graphs/contributors)
 [![License](https://img.shields.io/badge/license-zlib%2Flibpng-blue.svg)](LICENSE)
@@ -104,4 +104,4 @@ See [LICENSE](LICENSE) for details.
 
 ## Acknowledgements
 
-A huge thanks to the original [raylib](www.raylib.com), [r3d](https://github.com/Bigfoot71/r3d) and [raylib-cs](https://github.com/raylib-cs/raylib-cs) developers for their enormous contributions to our raylib community.
+A huge thanks to the original [raylib](https://www.raylib.com), [r3d](https://github.com/Bigfoot71/r3d) and [raylib-cs](https://github.com/raylib-cs/raylib-cs) developers for their enormous contributions to our raylib community.
