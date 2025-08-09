@@ -1,3 +1,5 @@
+![Logo](R3d.Net/Resources/Logo256.png "Logo")
+
 # R3d.Net
 
 C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering library for [raylib](https://www.raylib.com)

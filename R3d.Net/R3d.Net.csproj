@@ -12,6 +12,28 @@
     <PackageVersion>0.1.0</PackageVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Title>R3d.Net</Title>
+    <Description>C# bindings for R3D, advanced 3D rendering library for raylib</Description>
+    <RepositoryUrl>https://github.com/Kiriller12/R3d.Net/</RepositoryUrl>
+    <Authors>R3d.Net</Authors>
+    <PackageLicenseExpression>Zlib</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>Logo64.png</PackageIcon>
+    <PackageTags>csharp raylib r3d gamedev</PackageTags>
+    <PackageProjectUrl>https://github.com/Kiriller12/R3d.Net/</PackageProjectUrl>
+    <PackProject>true</PackProject>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Resources/Logo64.png" Pack="true" PackagePath="" />
+    <None Include="../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="7.0.1" />
   </ItemGroup>
