@@ -11,8 +11,8 @@ namespace R3d.Net
     /// </summary>
     /// <remarks>
     /// Should be actual as of 
-    /// <see href="https://github.com/Bigfoot71/r3d/blob/9c24e368d0114932df2107b3bd9053e6bffb7319/include/r3d.h">
-    /// 9c24e368d0114932df2107b3bd9053e6bffb7319
+    /// <see href="https://github.com/Bigfoot71/r3d/blob/2d896490bc922ddeaa4682367ba5c82f39726963/include/r3d.h">
+    /// 2d896490bc922ddeaa4682367ba5c82f39726963
     /// </see>
     /// </remarks>
     [SuppressUnmanagedCodeSecurity]
@@ -53,7 +53,7 @@ namespace R3d.Net
         /// <param name="flag">The state flag to check</param>
         /// <returns>True if the flag is set, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_HasState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool HasState(ConfigFlag flag);
+        public static extern CBool HasState(ConfigFlag flag);
 
         /// <summary>
         /// Sets internal state flags for the rendering engine
@@ -426,7 +426,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated polygon mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshPoly", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshPoly(int sides, float radius, bool upload);
+        public static extern Types.Mesh GenMeshPoly(int sides, float radius, CBool upload);
 
         /// <summary>
         /// Generate a plane mesh with specified dimensions and resolution.
@@ -441,7 +441,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated plane mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshPlane", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshPlane(float width, float length, int resX, int resZ, bool upload);
+        public static extern Types.Mesh GenMeshPlane(float width, float length, int resX, int resZ, CBool upload);
 
         /// <summary>
         /// Generate a cube mesh with specified dimensions.
@@ -455,7 +455,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated cube mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshCube", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshCube(float width, float height, float length, bool upload);
+        public static extern Types.Mesh GenMeshCube(float width, float height, float length, CBool upload);
 
         /// <summary>
         /// Generate a sphere mesh with specified parameters.
@@ -469,7 +469,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated sphere mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshSphere", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshSphere(float radius, int rings, int slices, bool upload);
+        public static extern Types.Mesh GenMeshSphere(float radius, int rings, int slices, CBool upload);
 
         /// <summary>
         /// Generate a hemisphere mesh with specified parameters.
@@ -483,7 +483,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated hemisphere mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshHemiSphere", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshHemiSphere(float radius, int rings, int slices, bool upload);
+        public static extern Types.Mesh GenMeshHemiSphere(float radius, int rings, int slices, CBool upload);
 
         /// <summary>
         /// Generate a cylinder mesh with specified parameters.
@@ -497,7 +497,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated cylinder mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshCylinder", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshCylinder(float radius, float height, int slices, bool upload);
+        public static extern Types.Mesh GenMeshCylinder(float radius, float height, int slices, CBool upload);
 
         /// <summary>
         /// Generate a cone mesh with specified parameters.
@@ -511,7 +511,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated cone mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshCone", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshCone(float radius, float height, int slices, bool upload);
+        public static extern Types.Mesh GenMeshCone(float radius, float height, int slices, CBool upload);
 
         /// <summary>
         /// Generate a torus mesh with specified parameters.
@@ -527,7 +527,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated torus mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshTorus", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshTorus(float radius, float size, int radSeg, int sides, bool upload);
+        public static extern Types.Mesh GenMeshTorus(float radius, float size, int radSeg, int sides, CBool upload);
 
         /// <summary>
         /// Generate a trefoil knot mesh with specified parameters.
@@ -542,7 +542,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated trefoil knot mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshKnot", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshKnot(float radius, float size, int radSeg, int sides, bool upload);
+        public static extern Types.Mesh GenMeshKnot(float radius, float size, int radSeg, int sides, CBool upload);
 
         /// <summary>
         /// Generate a terrain mesh from a heightmap image.
@@ -555,7 +555,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated heightmap terrain mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshHeightmap", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshHeightmap(Image heightmap, Vector3 size, bool upload);
+        public static extern Types.Mesh GenMeshHeightmap(Image heightmap, Vector3 size, CBool upload);
 
         /// <summary>
         /// Generate a voxel-style mesh from a cubicmap image.
@@ -569,7 +569,7 @@ namespace R3d.Net
         /// <param name="upload">If true, automatically uploads the mesh to GPU memory</param>
         /// <returns>Generated cubicmap mesh structure</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GenMeshCubicmap", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Types.Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize, bool upload);
+        public static extern Types.Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize, CBool upload);
 
         /// <summary>
         /// Free mesh data from both RAM and VRAM.
@@ -595,7 +595,7 @@ namespace R3d.Net
         /// <param name="dynamic">If true, allocates buffers with GL_DYNAMIC_DRAW for later updates. If false, uses GL_STATIC_DRAW for optimized static meshes</param>
         /// <returns>true if upload succeeded, false on error (e.g. invalid input or already uploaded)</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_UploadMesh", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool UploadMesh(Types.Mesh* mesh, bool dynamic);
+        public static extern CBool UploadMesh(Types.Mesh* mesh, CBool dynamic);
 
         /// <summary>
         /// Update an already uploaded mesh on the GPU.
@@ -609,7 +609,7 @@ namespace R3d.Net
         /// <param name="mesh">Pointer to the mesh structure with updated vertex and/or index data</param>
         /// <returns>true if update succeeded, false on error (e.g. mesh not uploaded or invalid data)</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_UpdateMesh", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool UpdateMesh(Types.Mesh* mesh);
+        public static extern CBool UpdateMesh(Types.Mesh* mesh);
 
         /// <summary>
         /// Recalculate the bounding box of a mesh.
@@ -709,7 +709,7 @@ namespace R3d.Net
         /// <param name="model">Pointer to the model structure to be unloaded</param>
         /// <param name="unloadMaterials">If true, also unloads all materials associated with the model. Set to false if textures are still being used elsewhere to avoid freeing shared resources</param>
         [DllImport(NativeDll, EntryPoint = "R3D_UnloadModel", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void UnloadModel(Types.Model* model, bool unloadMaterials);
+        public static extern void UnloadModel(Types.Model* model, CBool unloadMaterials);
 
         /// <summary>
         /// Update the bounding box of a model.
@@ -721,7 +721,7 @@ namespace R3d.Net
         /// <param name="model">Pointer to the model structure whose bounding box will be updated</param>
         /// <param name="">. individual mesh within the model before calculating the model's overall bounding box</param>
         [DllImport(NativeDll, EntryPoint = "R3D_UpdateModelBoundingBox", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void UpdateModelBoundingBox(Types.Model* model, bool updateMeshBoundingBoxes);
+        public static extern void UpdateModelBoundingBox(Types.Model* model, CBool updateMeshBoundingBoxes);
 
         /// <summary>
         /// Loads model animations from a supported file format (e.g., GLTF, IQM).
@@ -828,7 +828,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light to check</param>
         /// <returns>True if the light exists, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsLightExist", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsLightExist(uint id);
+        public static extern CBool IsLightExist(uint id);
 
         /// <summary>
         /// Gets the type of a light.
@@ -848,7 +848,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light to check</param>
         /// <returns>True if the light is active, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsLightActive", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsLightActive(uint id);
+        public static extern CBool IsLightActive(uint id);
 
         /// <summary>
         /// Toggles the state of a light (active or inactive).
@@ -869,7 +869,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light to set the active state for</param>
         /// <param name="active">True to activate the light, false to deactivate it</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetLightActive", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetLightActive(uint id, bool active);
+        public static extern void SetLightActive(uint id, CBool active);
 
         /// <summary>
         /// Gets the color of a light.
@@ -1147,7 +1147,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light for which shadows should be disabled</param>
         /// <param name="destroyMap">Whether or not to destroy the shadow map associated with the light</param>
         [DllImport(NativeDll, EntryPoint = "R3D_DisableShadow", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DisableShadow(uint id, bool destroyMap);
+        public static extern void DisableShadow(uint id, CBool destroyMap);
 
         /// <summary>
         /// Checks if shadow casting is enabled for a light.
@@ -1157,7 +1157,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light</param>
         /// <returns>True if shadow casting is enabled, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsShadowEnabled", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsShadowEnabled(uint id);
+        public static extern CBool IsShadowEnabled(uint id);
 
         /// <summary>
         /// Checks if a light has an associated shadow map.
@@ -1167,7 +1167,7 @@ namespace R3d.Net
         /// <param name="id">The ID of the light</param>
         /// <returns>True if the light has a shadow map, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_HasShadowMap", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool HasShadowMap(uint id);
+        public static extern CBool HasShadowMap(uint id);
 
         /// <summary>
         /// Gets the shadow map update mode of a light.
@@ -1344,7 +1344,7 @@ namespace R3d.Net
         /// <param name="system">A pointer to the `ParticleSystemCPU` where the particle will be emitted</param>
         /// <returns>`true` if the particle was successfully emitted, `false` if the system is at full capacity and cannot emit more particles</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_EmitParticle", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool EmitParticle(ParticleSystem* system);
+        public static extern CBool EmitParticle(ParticleSystem* system);
 
         /// <summary>
         /// Updates the particle emitter system by advancing particle positions.
@@ -1474,7 +1474,7 @@ namespace R3d.Net
         /// <param name="value">The value associated with the keyframe</param>
         /// <returns>`true` if the keyframe was successfully added, or `false` if the reallocation failed</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_AddKeyframe", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool AddKeyframe(InterpolationCurve* curve, float time, float value);
+        public static extern CBool AddKeyframe(InterpolationCurve* curve, float time, float value);
 
         /// <summary>
         /// Evaluates the interpolation curve at a specific time.
@@ -1591,7 +1591,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="enabled">Whether to enable or disable SSAO</param>
         [DllImport(NativeDll, EntryPoint = "R3D_SetSSAO", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void SetSSAO(bool enabled);
+        public static extern void SetSSAO(CBool enabled);
 
         /// <summary>
         /// Gets the current state of SSAO.
@@ -1600,7 +1600,7 @@ namespace R3d.Net
         /// </summary>
         /// <returns>True if SSAO is enabled, false otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_GetSSAO", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool GetSSAO();
+        public static extern CBool GetSSAO();
 
         /// <summary>
         /// Sets the radius for SSAO effect.
@@ -2075,7 +2075,7 @@ namespace R3d.Net
         /// <param name="position">The 3D point to test</param>
         /// <returns>`true` if inside the frustum, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsPointInFrustum", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsPointInFrustum(Vector3 position);
+        public static extern CBool IsPointInFrustum(Vector3 position);
 
         /// <summary>
         /// Checks if a sphere is inside the view frustum.
@@ -2093,7 +2093,7 @@ namespace R3d.Net
         /// <param name="radius">The sphere's radius (must be positive)</param>
         /// <returns>`true` if at least partially inside the frustum, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsSphereInFrustum", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsSphereInFrustum(Vector3 position, float radius);
+        public static extern CBool IsSphereInFrustum(Vector3 position, float radius);
 
         /// <summary>
         /// Checks if an AABB is inside the view frustum.
@@ -2110,7 +2110,7 @@ namespace R3d.Net
         /// <param name="aabb">The bounding box to test</param>
         /// <returns>`true` if at least partially inside the frustum, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsAABBInFrustum", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsAABBInFrustum(BoundingBox aabb);
+        public static extern CBool IsAABBInFrustum(BoundingBox aabb);
 
         /// <summary>
         /// Checks if an OBB is inside the view frustum.
@@ -2128,7 +2128,7 @@ namespace R3d.Net
         /// <param name="transform">World-space transform matrix</param>
         /// <returns>`true` if the transformed box intersects the frustum, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsOBBInFrustum", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsOBBInFrustum(BoundingBox aabb, Matrix4x4 transform);
+        public static extern CBool IsOBBInFrustum(BoundingBox aabb, Matrix4x4 transform);
 
         /// <summary>
         /// Fast pre-filtering test for point inside frustum bounding box.
@@ -2143,7 +2143,7 @@ namespace R3d.Net
         /// <param name="position">The 3D point to test</param>
         /// <returns>`true` if inside the frustum AABB, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsPointInFrustumBoundingBox", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsPointInFrustumBoundingBox(Vector3 position);
+        public static extern CBool IsPointInFrustumBoundingBox(Vector3 position);
 
         /// <summary>
         /// Fast pre-filtering test for sphere inside frustum bounding box.
@@ -2158,7 +2158,7 @@ namespace R3d.Net
         /// <param name="radius">Radius of the sphere</param>
         /// <returns>`true` if possibly intersecting the frustum AABB, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsSphereInFrustumBoundingBox", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsSphereInFrustumBoundingBox(Vector3 position, float radius);
+        public static extern CBool IsSphereInFrustumBoundingBox(Vector3 position, float radius);
 
         /// <summary>
         /// Fast pre-filtering test for AABB inside frustum bounding box.
@@ -2174,7 +2174,7 @@ namespace R3d.Net
         /// <param name="aabb">The bounding box to test</param>
         /// <returns>`true` if intersecting the frustum AABB, `false` otherwise</returns>
         [DllImport(NativeDll, EntryPoint = "R3D_IsAABBInFrustumBoundingBox", CallingConvention = CallingConvention.Cdecl)]
-        public static extern bool IsAABBInFrustumBoundingBox(BoundingBox aabb);
+        public static extern CBool IsAABBInFrustumBoundingBox(BoundingBox aabb);
 
         #endregion
 

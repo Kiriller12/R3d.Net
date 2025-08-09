@@ -8,6 +8,8 @@ C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering l
 
 R3d.Net targets net6.0 and uses the [R3D 0.3 or later](https://github.com/Bigfoot71/r3d) to build the native libraries. [Raylib-cs 7.0.1](https://github.com/raylib-cs/raylib-cs) is used as nuget dependency.
 
+R3d.Net is heavily inspired by [raylib-cs](https://github.com/raylib-cs/raylib-cs) and uses some of its functionality to implement bindings.
+
 ## Status
 
 Currently in active development, available API is subject to change.
@@ -89,6 +91,8 @@ namespace R3d.Net.Examples
 }
 
 ```
+
+Other examples can be found in the [R3d.Net.Examples](R3d.Net.Examples) folder. All examples were ported from the original R3D library.
 
 ## Contributing
 

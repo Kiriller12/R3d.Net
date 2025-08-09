@@ -1,59 +1,124 @@
-﻿using R3d.Net.Types;
-using Raylib_cs;
-using System.Numerics;
+﻿using Raylib_cs;
 
 namespace R3d.Net.Examples
 {
+    /// <summary>
+    /// Application
+    /// </summary>
     internal class Program
     {
-        static void Main(string[] args)
+        private const int Width = 800;
+        private const int Height = 600;
+
+        /// <summary>
+        /// Examples list
+        /// </summary>
+        private static readonly List<ExampleDescription> Examples = new()
         {
-            // Initializing raylib and r3d
-            Raylib.InitWindow(800, 600, "[r3d/R3d.Net] - Basic example");
-            R3d.Init(800, 600, 0);
-            Raylib.SetTargetFPS(60);
+            new ExampleDescription("Basic example", () => new BasicExample()),
+            new ExampleDescription("Animation example", () => new AnimationExample(), "Model made by zhuoyi0904"),
+            new ExampleDescription("Bloom example", () => new BloomExample()),
+            new ExampleDescription("Directional light example", () => new DirectionalExample()),
+            new ExampleDescription("Emission example", () => new EmissionExample(), "Model by har15204405"),
+            new ExampleDescription("Fog example", () => new FogExample()),
+            new ExampleDescription("Instanced rendering example", () => new InstancedExample()),
+            new ExampleDescription("Many lights example", () => new LightsExample()),
+            new ExampleDescription("Particles example", () => new ParticlesExample()),
+            new ExampleDescription("PBR car example", () => new PbrCarExample(), "Model made by MaximePages"),
+            new ExampleDescription("PBR musket example", () => new PbrMusketExample(), "Model made by TommyLingL"),
+            new ExampleDescription("Resize example", () => new ResizeExample()),
+            new ExampleDescription("Skybox example", () => new SkyboxExample()),
+            new ExampleDescription("Sponza example", () => new SponzaExample()),
+            new ExampleDescription("Sprite example", () => new SpriteExample()),
+            new ExampleDescription("Instanced sprites example", () => new InstancedSpritesExample()),
+            new ExampleDescription("Transparency example", () => new TransparencyExample())
+        };
 
-            // Setting up the scene
-            var plane = R3d.GenMeshPlane(1000, 1000, 1, 1, true);
-            var sphere = R3d.GenMeshSphere(0.5f, 64, 64, true);
-            var material = R3d.GetDefaultMaterial();
+        /// <summary>
+        /// Entry point
+        /// </summary>
+        public static void Main()
+        {
+            Console.WriteLine("Enter the number of the exemple to run:");
+            Console.WriteLine();
 
-            var light = R3d.CreateLight(LightType.Spot);
-            R3d.LightLookAt(light, new Vector3(0, 10, 5), Vector3.Zero);
-            R3d.EnableShadow(light, 4096);
-            R3d.SetLightActive(light, true);
-
-            var camera = new Camera3D
+            for (var i = 0; i < Examples.Count; i++)
             {
-                Position = new Vector3(0, 2, 2),
-                Target = Vector3.Zero,
-                Up = Vector3.UnitY,
-                FovY = 60.0f,
-                Projection = CameraProjection.Perspective
-            };
+                Console.WriteLine($"{i + 1}. {Examples[i].Name}");
+            }
 
-            // Main rendering loop
+            Console.WriteLine();
+            Console.Write("Example: ");
+
+            var exampleDescription = GetExample();
+            if (exampleDescription is null)
+            {
+                Console.ReadKey();
+
+                return;
+            }
+
+            Console.WriteLine("Running example: \"{0}\"", exampleDescription.Name);
+            Console.WriteLine();
+
+            using var example = exampleDescription.Create();
+
+            Raylib.InitWindow(Width, Height, "[r3d/R3d.Net] - " + exampleDescription.Name);
+            example.Init(Width, Height);
+
             while (!Raylib.WindowShouldClose())
             {
-                Raylib.UpdateCamera(ref camera, CameraMode.Orbital);
+                var deltaTime = Raylib.GetFrameTime();
+                example.Update(deltaTime);
 
                 Raylib.BeginDrawing();
-                R3d.Begin(camera);
 
-                R3d.DrawMesh(ref plane, ref material, Raymath.MatrixTranslate(0, -0.5f, 0));
-                R3d.DrawMesh(ref sphere, ref material, Raymath.MatrixIdentity());
+                example.Render();
+                RenderCredits(exampleDescription.Credits);
+                Raylib.DrawFPS(10, 10);
 
-                R3d.End();
                 Raylib.EndDrawing();
             }
 
-            // Cleaning memory
-            R3d.UnloadMesh(ref plane);
-            R3d.UnloadMesh(ref sphere);
-
-            // Closing r3d and raylib
-            R3d.Close();
             Raylib.CloseWindow();
+        }
+
+        /// <summary>
+        /// Returns an example to run
+        /// </summary>
+        private static ExampleDescription? GetExample()
+        {
+            try
+            {
+                var input = Console.ReadLine();
+                var index = Convert.ToInt32(input);
+
+                return Examples[index - 1];
+            }
+            catch
+            {
+                Console.WriteLine("Please select a valid number from list above!");
+
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Renders credits text
+        /// </summary>
+        /// <param name="text">Credits text</param>
+        private static void RenderCredits(string? text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return;
+            }
+
+            var len = Raylib.MeasureText(text, 16);
+
+            Raylib.DrawRectangle(0, Height - 36, 20 + len, 36, Raylib.ColorAlpha(Color.Black, 0.5f));
+            Raylib.DrawRectangleLines(0, Height - 36, 20 + len, 36, Color.Black);
+            Raylib.DrawText(text, 10, Height - 26, 16, Color.Lime);
         }
     }
 }

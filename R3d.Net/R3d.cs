@@ -907,7 +907,7 @@ namespace R3d.Net
         /// <param name="mesh">Reference to the mesh structure containing vertex and index data</param>
         /// <param name="dynamic">If true, allocates buffers with GL_DYNAMIC_DRAW for later updates. If false, uses GL_STATIC_DRAW for optimized static meshes</param>
         /// <returns>true if upload succeeded, false on error (e.g. invalid input or already uploaded)</returns>
-        public static bool UploadMesh(ref Types.Mesh mesh, bool dynamic)
+        public static CBool UploadMesh(ref Types.Mesh mesh, CBool dynamic)
         {
             fixed (Types.Mesh* meshPointer = &mesh)
             {
@@ -926,7 +926,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="mesh">Reference to the mesh structure with updated vertex and/or index data</param>
         /// <returns>true if update succeeded, false on error (e.g. mesh not uploaded or invalid data)</returns>
-        public static bool UpdateMesh(ref Types.Mesh mesh)
+        public static CBool UpdateMesh(ref Types.Mesh mesh)
         {
             fixed (Types.Mesh* meshPointer = &mesh)
             {
@@ -1046,7 +1046,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="model">Reference to the model structure to be unloaded</param>
         /// <param name="unloadMaterials">If true, also unloads all materials associated with the model. Set to false if textures are still being used elsewhere to avoid freeing shared resources</param>
-        public static void UnloadModel(ref Types.Model model, bool unloadMaterials)
+        public static void UnloadModel(ref Types.Model model, CBool unloadMaterials)
         {
             fixed (Types.Model* modelPointer = &model)
             {
@@ -1063,7 +1063,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="model">Reference to the model structure whose bounding box will be updated</param>
         /// <param name="">. individual mesh within the model before calculating the model's overall bounding box</param>
-        public static void UpdateModelBoundingBox(ref Types.Model model, bool updateMeshBoundingBoxes)
+        public static void UpdateModelBoundingBox(ref Types.Model model, CBool updateMeshBoundingBoxes)
         {
             fixed (Types.Model* modelPointer = &model)
             {
@@ -1187,7 +1187,7 @@ namespace R3d.Net
         /// </summary>
         /// <param name="system">A reference to the `ParticleSystemCPU` where the particle will be emitted</param>
         /// <returns>`true` if the particle was successfully emitted, `false` if the system is at full capacity and cannot emit more particles</returns>
-        public static bool EmitParticle(ref ParticleSystem system)
+        public static CBool EmitParticle(ref ParticleSystem system)
         {
             fixed (ParticleSystem* systemPointer = &system)
             {
@@ -1308,7 +1308,7 @@ namespace R3d.Net
         /// <param name="time">The time at which the keyframe will be added</param>
         /// <param name="value">The value associated with the keyframe</param>
         /// <returns>`true` if the keyframe was successfully added, or `false` if the reallocation failed</returns>
-        public static bool AddKeyframe(ref InterpolationCurve curve, float time, float value)
+        public static CBool AddKeyframe(ref InterpolationCurve curve, float time, float value)
         {
             fixed (InterpolationCurve* curvePointer = &curve)
             {
