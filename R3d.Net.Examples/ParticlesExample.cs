@@ -11,7 +11,6 @@ namespace R3d.Net.Examples
     {
         private Types.Mesh _sphere;
         private Types.Material _material;
-        private Skybox _skybox;
 
         private Camera3D _camera;
 

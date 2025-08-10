@@ -1062,7 +1062,7 @@ namespace R3d.Net
         /// mesh bounding boxes as well
         /// </summary>
         /// <param name="model">Reference to the model structure whose bounding box will be updated</param>
-        /// <param name="">. individual mesh within the model before calculating the model's overall bounding box</param>
+        /// <param name="updateMeshBoundingBoxes">If true, also updates the bounding box of each individual mesh within the model before calculating the model's overall bounding box</param>
         public static void UpdateModelBoundingBox(ref Types.Model model, CBool updateMeshBoundingBoxes)
         {
             fixed (Types.Model* modelPointer = &model)
@@ -1079,7 +1079,6 @@ namespace R3d.Net
         /// using UnloadModelAnimations()
         /// </summary>
         /// <param name="fileName">Path to the model file containing animation(s)</param>
-        /// <param name="animCount">An integer that will receive the number of animations loaded</param>
         /// <param name="targetFrameRate">Desired frame rate (FPS) to sample the animation at. For example, 30 or 60</param>
         /// <returns>A dynamically allocated array of ModelAnimation. NULL on failure</returns>
         public static Span<Types.ModelAnimation> LoadModelAnimations(string fileName, int targetFrameRate)
@@ -1278,7 +1277,6 @@ namespace R3d.Net
         /// </summary>
         /// <remarks>
         /// The frames are read from right to left, and the cursor moves to the next row after completing a line.
-        /// <remarks>
         /// The `speed` parameter can be calculated as the number of frames per second multiplied by `GetFrameTime()`
         /// </remarks>
         /// <param name="sprite">A reference to the `Sprite` to update</param>

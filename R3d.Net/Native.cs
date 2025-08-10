@@ -153,7 +153,6 @@ namespace R3d.Net
         /// will process all necessary render passes and output the final result to the main
         /// or custom framebuffer
         /// </summary>
-        /// <param name="camera">The camera to use for rendering the scene</param>
 
         [DllImport(NativeDll, EntryPoint = "R3D_End", CallingConvention = CallingConvention.Cdecl)]
         public static extern void End();
@@ -719,7 +718,7 @@ namespace R3d.Net
         /// mesh bounding boxes as well
         /// </summary>
         /// <param name="model">Pointer to the model structure whose bounding box will be updated</param>
-        /// <param name="">. individual mesh within the model before calculating the model's overall bounding box</param>
+        /// <param name="updateMeshBoundingBoxes">If true, also updates the bounding box of each individual mesh within the model before calculating the model's overall bounding box</param>
         [DllImport(NativeDll, EntryPoint = "R3D_UpdateModelBoundingBox", CallingConvention = CallingConvention.Cdecl)]
         public static extern void UpdateModelBoundingBox(Types.Model* model, CBool updateMeshBoundingBoxes);
 
@@ -1426,7 +1425,6 @@ namespace R3d.Net
         /// </summary>
         /// <remarks>
         /// The frames are read from right to left, and the cursor moves to the next row after completing a line.
-        /// <remarks>
         /// The `speed` parameter can be calculated as the number of frames per second multiplied by `GetFrameTime()`
         /// </remarks>
         /// <param name="sprite">A pointer to the `Sprite` to update</param>
