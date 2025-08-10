@@ -9,7 +9,7 @@ C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering l
 [![Chat on Discord](https://img.shields.io/discord/426912293134270465.svg?logo=discord)](https://discord.gg/raylib)
 [![NuGet Version](https://img.shields.io/nuget/v/R3d.Net)](https://www.nuget.org/packages/R3d.Net/)
 
-R3d.Net targets net6.0 and uses the [R3D 0.3 or later](https://github.com/Bigfoot71/r3d) to build the native libraries. [Raylib-cs 7.0.1](https://github.com/raylib-cs/raylib-cs) is used as nuget dependency.
+R3d.Net targets net8.0 and uses the [R3D 0.3 or later](https://github.com/Bigfoot71/r3d) to build the native libraries. [Raylib-cs 7.0.1](https://github.com/raylib-cs/raylib-cs) is used as nuget dependency.
 
 R3d.Net is heavily inspired by [raylib-cs](https://github.com/raylib-cs/raylib-cs) and uses some of its functionality to implement bindings.
 
