@@ -57,13 +57,17 @@ jobs:
           cmake -D R3D_RAYLIB_VENDORED=ON -D R3D_ASSIMP_VENDORED=ON ${{ matrix.arch }} ..
           cmake --build . --config Release
             
+      - name: prepare artifacts
+        run: |
+          mkdir artifacts
+          cp build/${{ matrix.r3d }} artifacts/
+          cp build/external/assimp/bin/${{ matrix.assimp }} artifacts/
+
       - name: upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: r3d-${{ matrix.name }}
-          path: |
-            build/${{ matrix.r3d }}
-            build/external/assimp/bin/${{ matrix.assimp }}
+          path: artifacts/*
           if-no-files-found: error
 
   publish-release:
