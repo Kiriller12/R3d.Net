@@ -1,0 +1,111 @@
+name: Release Build
+on:
+  push:
+    tags: "*"
+    
+jobs:
+  build-r3d:
+    strategy:
+      matrix:
+        name: [linux-x64, win-x86, win-x64]
+        include:
+          - name: linux-x64
+            os: ubuntu-latest
+            arch: ''
+            r3d: libr3d.so
+            assimp: libassimp.so
+
+          - name: win-x86
+            os: windows-latest
+            arch: -A win32
+            r3d: Release/r3d.dll
+            assimp: Release/assimp*.dll
+
+          - name: win-x64
+            os: windows-latest
+            arch: -A x64
+            r3d: Release/r3d.dll
+            assimp: Release/assimp*.dll
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with:
+          repository: Bigfoot71/r3d
+          submodules: recursive
+
+      - name: setup dependencies
+        if: ${{ matrix.name == 'linux-x64' }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install \
+            libasound2-dev \
+            libx11-dev \
+            libxrandr-dev \
+            libxi-dev \
+            libgl1-mesa-dev \
+            libglu1-mesa-dev \
+            libxcursor-dev \
+            libxinerama-dev
+
+      - name: build
+        run: |
+          mkdir build
+          cd build
+          cmake -D R3D_RAYLIB_VENDORED=ON -D R3D_ASSIMP_VENDORED=ON ${{ matrix.arch }} ..
+          cmake --build . --config Release
+            
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: r3d-${{ matrix.name }}
+          path: |
+            build/${{ matrix.r3d }}
+            build/external/assimp/bin/${{ matrix.assimp }}
+          if-no-files-found: error
+
+  publish-release:
+    runs-on: ubuntu-latest
+    needs:
+      - build-r3d
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: r3d-linux-x64
+          path: R3d.Net/runtimes/linux-x64/native
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: r3d-win-x86
+          path: R3d.Net/runtimes/win-x86/native
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: r3d-win-x64
+          path: R3d.Net/runtimes/win-x64/native
+
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+
+      - name: create NuGet Package
+        run: dotnet pack R3d.Net -c Release --output nuget
+
+      - name: upload NuGet Package As Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: R3d.Net
+          path: nuget/*
+
+      - name: publish NuGet Package
+        run: |
+          dotnet nuget push \
+            nuget/* \
+            --api-key ${{secrets.NUGET_API_KEY}} \
+            --source https://api.nuget.org/v3/index.json
