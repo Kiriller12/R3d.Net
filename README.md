@@ -3,7 +3,9 @@
 # R3d.Net
 
 > [!WARNING]
-> This repository is outdated, consider using other available bindings https://github.com/Bigfoot71/r3d?tab=readme-ov-file#bindings
+> This repository is outdated, consider using [other available bindings](https://github.com/Bigfoot71/r3d?tab=readme-ov-file#bindings)
+> 
+> Recommended C# bindings with active support and updates: [r3d-cs](https://github.com/graphnode/r3d-cs)
 
 C# bindings for [R3D](https://github.com/Bigfoot71/r3d), advanced 3D rendering library for [raylib](https://www.raylib.com)
 
