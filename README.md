@@ -20,7 +20,7 @@ R3d.Net is heavily inspired by [raylib-cs](https://github.com/raylib-cs/raylib-c
 
 ## Status
 
-Currently in active development, available API is subject to change.
+At the moment I don't have enough time and energy for constant support and updates, so the project is archived, please use other bindings instead.
 
 ## Installation - NuGet
 
